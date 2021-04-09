@@ -4,26 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./stylesheets/style.css">
+    <script src="resources/js/plugin/datepicker/bootstrap-datepicker.ko.min.js"></script>
     <link rel="stylesheet" href="./bootstrap.min.css">
+    <link rel="stylesheet" href="./stylesheets/style.css">
 </head>
 <body>
-    <h1>Welcome to ToDoList!</h1>
+    <div class="container">
+    <h1 style="text-align: center;">Welcome to ToDoList!</h1>
     <form class="todo-form">
         <div class="input-group mb-3">
-            <input type="text" class="form-control todo-input" placeholder="Input your ToDos!" aria-label="Recipient's username" aria-describedby="button-addon2">
+            <input type="text" class="form-control todo-input" placeholder="Input your ToDos!" aria-label="Recipient's username" aria-describedby="button-addon2" required>
+            <div class="deadline-selector">
+            <input type="date" name="deadline" class="form-control calendar" required/>
+            </div>
             <button class="btn btn-outline-secondary subBtn" type="button" id="button-addon2">Button</button>
           </div>
     </form>
     <table class="table table-striped">
         <thead>
             <td>#</td>
-            <td colspan="3">Contents</td>
+            <td class="contents">Contents</td>
+            <td class="deadline">Deadline</td>
+            <td></td>
         </thead>
         <tbody>
 
         </tbody>
     </table>
+    </div>
     <script src="./javascripts/todo.js"></script>
 </body>
 </html>

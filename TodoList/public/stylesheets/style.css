@@ -1,7 +1,7 @@
+
 body {
     padding: 50px;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-    background-color: red;
   }
   a {
     color: #00b7ff;
@@ -10,8 +10,62 @@ body {
   .complete {
       text-decoration: line-through;
   }
-  
 
 .btn{
   float:right;
+}
+
+td{
+  text-align:center;
+}
+
+
+.contents{
+  width:60%;
+}
+
+.deadline{
+  min-width:50px;
+}
+
+.line{
+  text-decoration:line-through;
+  color:red;
+}
+
+.deadline-selector > .form-control{
+  width:170px;
+  border-radius:0px;
+  border:1px solid #ced4da;
+  height:100%;
+}
+
+.calendar{
+  width:137px;
+  border:1px solid #ced4da;
+  font-size:1rem;
+  line-height:1.5;
+  padding-top:5px;
+  text-align:center;
+  font-weight:400;
+}
+
+
+@media(max-width:750px){
+  *{
+    font-size:13px;
+  }
+  .contents{
+    width:30%;
+  }
+  .deadline-selector > .form-control{
+    width:120px;
+    font-size:8px;
+  }
+  .delBtn, .clearBtn{
+    width:30px;
+    margin-right:10px;
+    padding:0px;
+  }
+
 }

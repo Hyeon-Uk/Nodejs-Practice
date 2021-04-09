@@ -5,14 +5,36 @@ const todoForm=document.querySelector('.todo-form');
 const todoList=document.querySelector('tbody');
 //추가,삭제,완료
 const deleteTodo=(event)=>{
-    console.log("hello");
+    const targetId=event.target.parentNode.parentNode.id;
+    const xhr=new XMLHttpRequest();
+    xhr.open('POST',`${url}delete`);
+    xhr.setRequestHeader("Content-type","application/json");
+    xhr.send(JSON.stringify({id:targetId}));
+    xhr.onload=()=>{
+        getTodo();   
+    }
+}
+
+const clearTodo=(event)=>{
+    const targetId=event.target.parentNode.parentNode.id;
+    const targetTr=event.target.parentNode.parentNode;
+
+    const xhr=new XMLHttpRequest();
+    xhr.open('POST',`${url}clear`);
+    xhr.setRequestHeader("Content-type","application/json");
+    xhr.send(JSON.stringify({id:targetId}));
+    xhr.onload=()=>{
+        targetTr.classList.toggle('line');
+    }
 }
 
 const addTodo=(event)=>{
     event.preventDefault();
     const value=document.querySelector('.todo-input').value;
+    const deadLine=document.querySelector('.calendar').value;
     const obj={
         'value':value,
+        'deadline':deadLine,
         'complete':false
     };
 
@@ -37,11 +59,13 @@ const getTodo=()=>{
         let index=1;
         list.forEach(element => {
             lists+=`
-            <tr id=${index}>
+            <tr id=${index} class=" ${element.complete===true?"line":""}">
             <td>${index++}</td>
-            <td>${element.content}
-            <button type="button" class="btn btn-dark delBtn">Delete</button>
-            <button type="button" class="btn btn-light clearBtn">Clear</button>
+            <td class="contents">${element.content}</td>
+            <td>${element.deadline}</td>
+            <td>
+            <button type="button" class="btn btn-dark delBtn" onClick="deleteTodo(event)">X</button>
+            <button type="button" class="btn btn-light clearBtn" onClick="clearTodo(event)">V</button>
             </td>
             </tr>
             `
