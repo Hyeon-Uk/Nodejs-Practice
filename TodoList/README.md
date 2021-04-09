@@ -7,10 +7,10 @@ Responsive web design✔
 WebServer✔   
 
 Used Technique:   
-Vanilla Javascript!   
-Node.js!   
-Express!   
-Bootstrap!  
+Vanilla Javascript✔   
+Node.js✔    
+Express✔  
+Bootstrap✔  
   
 
 
