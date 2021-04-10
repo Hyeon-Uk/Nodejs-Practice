@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    hello
+    <form action="/logout" method="post">
+        <input type="submit" value="logout">
+    </form>
+
+    <form id="make-form">
+        <input type="text" id="makeValue">
+        <input type="submit" >
+    </form>
+    <ul id="article">
+
+    </ul>
+
+    <script>
+        const makeArticle=(event)=>{
+            event.preventDefault();
+            const value=document.querySelector('#makeValue').value;
+            const ul=document.querySelector('#article');
+            const xhr=new XMLHttpRequest();
+            xhr.open('POST','http://localhost:8000/make',true);
+            xhr.setRequestHeader("Content-type","application/json");
+            xhr.send(JSON.stringify({"text":value}));
+
+            xhr.onload=()=>{
+                const data=JSON.parse(xhr.response);
+                console.log(data);
+                ul.innerHTML=`
+                    <li id="${data.name}">${data.text}</li>
+                `+ul.innerHTML;
+            }
+        }
+
+        const loadArticle=()=>{
+            const ul=document.querySelector('#article');
+            const xhr=new XMLHttpRequest();
+            xhr.open('POST','http://localhost:8000/load');
+            xhr.setRequestHeader("Content-type","application/json");
+            xhr.send();
+
+            xhr.onload=()=>{
+                const data=JSON.parse(xhr.response);
+                console.log(data);
+                data.forEach(element => {
+                    ul.innerHTML+=`
+                     <li id="${element.name}">${element.text}</li>
+                    `
+                });
+            }
+        }
+
+        document.querySelector('#make-form').addEventListener("submit",makeArticle);
+        loadArticle();
+    </script>
+</body>
+</html>
