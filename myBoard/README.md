@@ -3,7 +3,9 @@ SignUp
 Login👍     
 Write-Board👍   
 Delete-Board   
-Update-Board   
+Update-Board    
+Recommend system   
+Notification   
 
 **Used Tech**:   
 Node.js👍   
