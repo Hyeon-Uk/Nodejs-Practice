@@ -8,7 +8,8 @@ Recommend system
 Notification    
 Comment system   
 
-**Used Tech**:   
+**Used Tech**:    
+javascript👍   
 Node.js👍     
 Express👍   
 ejs👍   
