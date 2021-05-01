@@ -12,6 +12,8 @@ Comment system
 javascript👍   
 Node.js👍     
 Express👍   
+session   
+REST API   
 ejs👍   
 javascript👍   
 File-System👍   
