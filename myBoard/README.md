@@ -5,10 +5,17 @@ Write-Board👍
 Delete-Board   
 Update-Board    
 Recommend system   
-Notification   
+Notification    
+Comment system   
 
-**Used Tech**:   
-Node.js👍   
+**Used Tech**:    
+javascript👍   
+Node.js👍     
+Express👍   
+session   
+REST API   
 ejs👍   
 javascript👍   
 File-System👍   
+Bootstrap   
+
