@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/email/form" method="post">
+        <input type="text" name="email">
+        <br/>
+        <input type="submit">
+    </form>
+    <button class="ajaxsend">ajaxsend</button>
+    <div class='result'></div>
+
+    <script>
+        document.querySelector(".ajaxsend").addEventListener("click",()=>{
+            const inputData=document.forms[0].elements[0].value;
+            sendAjax("http://127.0.0.1:3000/email/ajax",inputData);
+        });
+
+        const sendAjax = (url,data) =>{
+            const Data=JSON.stringify({"email":data});
+            const xhr=new XMLHttpRequest();
+            xhr.open("post",url);
+            xhr.setRequestHeader("Content-type","application/json");
+            xhr.send(Data);
+
+            xhr.addEventListener("load",()=>{
+                const result=JSON.parse(xhr.responseText);
+                var resultDiv=document.querySelector(".result");
+                if(result.result!=="ok") resultDiv.innerHTML="not found";
+                else resultDiv.innerHTML=result.name;
+            });
+        }
+    </script>
+</body>
+</html>
