@@ -7,7 +7,10 @@ var passport=require('passport');
 var LocalStrategy=require('passport-local').Strategy;
 
 router.get('/',(req,res)=>{
-    res.render('join.ejs');
+    let msg;
+    let errMsg=req.flash('error');
+    if(errMsg) msg=errMsg;
+    res.render('join.ejs',{"message":msg});
 });
 
 // router.post('/',(req,res)=>{
@@ -21,13 +24,41 @@ router.get('/',(req,res)=>{
 //     });
 // });
 
+passport.serializeUser((user,done)=>{
+    console.log('passport session save : ',user.id);
+    done(null,user.id);
+});
+
+passport.deserializeUser((id,done)=>{
+    console.log('passport session get id : ',id);
+    done(null,id);
+});
+
 passport.use('local-join',new LocalStrategy({
     usernameField:'email',
     passwordField:'password',
     passReqToCallback:true
 },(req,email,password,done)=>{
-    console.log('local-join callback called');
+    const query=db.query('select * from user where email=?',[email],(err,rows)=>{
+        if(err) throw err;
+
+        if(rows.length){
+            console.log("existed user");
+            return done(null,false,{message:"your email is already used"});
+        }else{
+            const sql={email:email,pw:password};
+            const query=db.query('insert into user set ?',sql,(err,rows)=>{
+                if(err) throw err;
+                return done(null,{"email":email,"id":rows.insertId});
+            });
+        }
+    });
 }));
 
+router.post('/',passport.authenticate('local-join',{
+    successRedirect:'/main',
+    failureRedirect:'/join',
+    failureFlash:true
+}));
 
 module.exports =router;
