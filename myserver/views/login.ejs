@@ -9,7 +9,6 @@
     <form action="/email/form" method="post">
         email: <input type="text" name="email"><br/>
         password : <input type="password" name= "password"><br/>
-        <input type="submit">
     </form>
     <button class="ajaxsend">login</button>
     <div class='result'></div>
@@ -17,12 +16,12 @@
     <script>
         document.querySelector(".ajaxsend").addEventListener("click",()=>{
             const email=document.getElementsByName('email')[0].value;
-            const password = document.getElementsByName('password')[1].value;
-            sendAjax("http://127.0.0.1:3000/email/ajax",{'email':email,'password':passowrd});
+            const password = document.getElementsByName('password')[0].value;
+            sendAjax("http://localhost:3000/login",{'email':email,'password':password});
         });
 
         const sendAjax = (url,data) =>{
-            const Data=JSON.stringify({"email":data});
+            const Data=JSON.stringify(data);
             const xhr=new XMLHttpRequest();
             xhr.open("post",url);
             xhr.setRequestHeader("Content-type","application/json");
@@ -31,8 +30,14 @@
             xhr.addEventListener("load",()=>{
                 const result=JSON.parse(xhr.responseText);
                 var resultDiv=document.querySelector(".result");
-                if(result.result!=="ok") resultDiv.innerHTML="not found";
-                else resultDiv.innerHTML=result.name;
+
+                if(result.email){
+                    window.location.href="/main";
+                }
+                // else if(xhr.status==401){
+
+                // }
+                else resultDiv.innerHTML=result;
             });
         }
     </script>
