@@ -1,5 +1,5 @@
 import { ArrowLeftOutlined, ArrowRightOutlined } from '@material-ui/icons'
-import {React,useState} from 'react'
+import {React,useState,useEffect} from 'react'
 import styled from 'styled-components'
 import {sliderItems} from "../data"
 
@@ -89,7 +89,6 @@ const Slider = () => {
             setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0);
           }
     }
-
     return (
         <Container>
             <Arrow direction="left" onClick={()=>handleClick("left")}>
